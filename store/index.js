@@ -34,8 +34,8 @@ export const actions = {
       for (const c in data) {
         categories.push({
           title: data[c],
-          slug: data[c],
-          image: 'https://image-placeholder.com/images/actual-size/320x320.png'
+          slug: data[c]
+          // image: 'https://image-placeholder.com/images/actual-size/320x320.png'
         })
       }
       /* response.forEach((val) => {
@@ -51,10 +51,12 @@ export const actions = {
       return
     }
     // const currentCategory = await this.$axios.get('')
+    const categoryProducts = (await helper.getCategoryProducts(slug)).products
+
     const category = {
       title: slug,
       slug,
-      image: 'https://image-placeholder.com/images/actual-size/320x320.png'
+      image: categoryProducts[0].thumbnail
     }
     commit('SET_CURRENT_CATEGORY', category)
     const products = await helper.getCategoryProducts(slug)

@@ -15,10 +15,10 @@
           </v-col>
           <v-col cols="8">
             <v-row>
-              <v-col v-for="chunk in chunkArray(categoryLinks, 3)" :key="chunk" cols="4">
+              <v-col v-for="chunk in chunkArray(categoryLinks, 3)" :key="chunk.id" cols="4">
                 <v-list dense flat>
                   <v-list-item
-                    v-for="item in chunk"
+                    v-for="item in chunk.list"
                     :key="item.title"
                     :to="categoryUrl(item.slug)"
                     class="text"
@@ -33,12 +33,12 @@
         <v-card-text>
           <v-btn
             v-for="icon in icons"
-            :key="icon"
+            :key="icon.icon"
             class="mx-4 white--text"
             icon
           >
             <v-icon size="24px">
-              {{ icon }}
+              {{ icon.icon }}
             </v-icon>
           </v-btn>
         </v-card-text>
@@ -86,7 +86,10 @@ export default {
     chunkArray (array, size) {
       const result = []
       for (let i = 0; i < array.length; i += size) {
-        const chunk = array.slice(i, i + size)
+        const chunk = {
+          id: i,
+          list: array.slice(i, i + size)
+        }
         result.push(chunk)
       }
       return result

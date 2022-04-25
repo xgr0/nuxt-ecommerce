@@ -8,22 +8,14 @@ import helper from '@/utils/helper'
 const _loadCategories = async (store) => {
   const data = await helper.getCategories()
   const categories = []
-
   for (const c in data) {
     categories.push({
       title: data[c],
-      slug: data[c],
-      image: 'https://image-placeholder.com/images/actual-size/320x320.png'
+      slug: data[c]
+      // image: 'https://image-placeholder.com/images/actual-size/320x320.png'
     })
   }
 
-  /* response.forEach((val) => {
-    categories.push({
-      title: val,
-      slug: val,
-      image: 'https://image-placeholder.com/images/actual-size/320x320.png'
-    })
-  }) */
   store.commit('SET_CATEGORIES', categories)
 }
 
